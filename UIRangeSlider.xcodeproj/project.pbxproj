@@ -12,6 +12,8 @@
 		3831C48D2A38CB630089F811 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831C48C2A38CB630089F811 /* ViewController.swift */; };
 		3831C4922A38CB650089F811 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3831C4912A38CB650089F811 /* Assets.xcassets */; };
 		3831C4952A38CB650089F811 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3831C4932A38CB650089F811 /* LaunchScreen.storyboard */; };
+		3831C49F2A38CFEF0089F811 /* UIRangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831C49D2A38CFEF0089F811 /* UIRangeSliderTrackLayer.swift */; };
+		3831C4A02A38CFEF0089F811 /* UIRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831C49E2A38CFEF0089F811 /* UIRangeSlider.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -22,6 +24,8 @@
 		3831C4912A38CB650089F811 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		3831C4942A38CB650089F811 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		3831C4962A38CB650089F811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3831C49D2A38CFEF0089F811 /* UIRangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRangeSliderTrackLayer.swift; sourceTree = "<group>"; };
+		3831C49E2A38CFEF0089F811 /* UIRangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRangeSlider.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,11 +61,29 @@
 				3831C4882A38CB630089F811 /* AppDelegate.swift */,
 				3831C48A2A38CB630089F811 /* SceneDelegate.swift */,
 				3831C48C2A38CB630089F811 /* ViewController.swift */,
+				3831C49C2A38CFEF0089F811 /* UIRangeSlider */,
+				3831C4A32A38D2920089F811 /* Utils */,
+			);
+			path = UIRangeSlider;
+			sourceTree = "<group>";
+		};
+		3831C49C2A38CFEF0089F811 /* UIRangeSlider */ = {
+			isa = PBXGroup;
+			children = (
+				3831C49E2A38CFEF0089F811 /* UIRangeSlider.swift */,
+				3831C49D2A38CFEF0089F811 /* UIRangeSliderTrackLayer.swift */,
+			);
+			path = UIRangeSlider;
+			sourceTree = "<group>";
+		};
+		3831C4A32A38D2920089F811 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
 				3831C4912A38CB650089F811 /* Assets.xcassets */,
 				3831C4932A38CB650089F811 /* LaunchScreen.storyboard */,
 				3831C4962A38CB650089F811 /* Info.plist */,
 			);
-			path = UIRangeSlider;
+			name = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -134,6 +156,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3831C49F2A38CFEF0089F811 /* UIRangeSliderTrackLayer.swift in Sources */,
+				3831C4A02A38CFEF0089F811 /* UIRangeSlider.swift in Sources */,
 				3831C48D2A38CB630089F811 /* ViewController.swift in Sources */,
 				3831C4892A38CB630089F811 /* AppDelegate.swift in Sources */,
 				3831C48B2A38CB630089F811 /* SceneDelegate.swift in Sources */,
