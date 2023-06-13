@@ -19,10 +19,11 @@ class UIRangeSlider: UIControl {
     let upperThumbImageView = UIImageView()
     var previousLocation = CGPoint()
 
-    var trackTintColor: UIColor
-    var trackHighlightTintColor: UIColor
-    var thumbImage: UIImage
-    var thumbImageSize: CGSize
+    var trackTintColor: UIColor = UIColor()
+    var trackHighlightTintColor: UIColor = UIColor()
+    var thumbImage: UIImage = UIImage()
+    var thumbImageSize: CGSize = CGSize(width: 0, height: 0)
+    private let minimumHitArea = CGSize(width: UIScreen.main.bounds.width, height: 100)
 
     var upperPrice: CGFloat = 0
     var lowerPrice: CGFloat = 0
@@ -37,17 +38,9 @@ class UIRangeSlider: UIControl {
         return lround((upperValue + 1.0 / (priceRange/lowerPrice)) * priceRange)
     }
 
-    init(thumbImageSize: CGSize, thumbImage: UIImage, trackTintColor: UIColor, trackHighlightTintColor: UIColor,frame: CGRect) {
-        self.thumbImageSize = thumbImageSize
-        self.thumbImage = thumbImage
-        self.trackTintColor = trackTintColor
-        self.trackHighlightTintColor = trackHighlightTintColor
+    override init(frame: CGRect) {
         super.init(frame: frame)
-
-        configureUI()
-        updateLayerFrames()
     }
-
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -58,7 +51,7 @@ class UIRangeSlider: UIControl {
 
 extension UIRangeSlider {
     
-    private func configureUI() {
+    func configurate() {
         trackLayer.rangeSlider = self
         trackLayer.contentsScale = UIScreen.main.scale
         layer.addSublayer(trackLayer)
@@ -146,6 +139,13 @@ extension UIRangeSlider {
         upperThumbImageView.isHighlighted = false
     }
 
+    open override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        let sliderSize = self.bounds.size
+        let widthToAdd = max(minimumHitArea.width - sliderSize.width, 0)
+        let heightToAdd = max(minimumHitArea.height - sliderSize.height, 0)
+        let largerFrame = self.bounds.insetBy(dx: -widthToAdd / 2, dy: -heightToAdd / 2)
+        return (largerFrame.contains(point)) ? self : nil
+    }
 
 }
 

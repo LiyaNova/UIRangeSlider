@@ -14,7 +14,22 @@ class ViewController: UIViewController {
     private var minPrice: CGFloat = 0
     private var defaultMinPrice: CGFloat = 0
 
-    lazy var rangeSlider = setRangeSlider()
+    lazy var rangeSlider: UIRangeSlider = {
+        var sideInset: CGFloat { 40 }
+        let sliderFrame = CGRect(x: sideInset, y: UIScreen.main.bounds.height / 2,
+                                 width: UIScreen.main.bounds.width - sideInset * 2, height: 10)
+
+        let slider = UIRangeSlider(frame: sliderFrame)
+        slider.trackTintColor =  UIColor.lightGray
+        slider.trackHighlightTintColor = UIColor.gray
+        slider.thumbImage = UIImage(named: "thumb")!
+        slider.thumbImageSize = CGSize(width: 40, height: 40)
+        slider.configurate()
+        slider.updateLayerFrames()
+        slider.addTarget(self, action: #selector(rangeSliderAction(_ :)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(rangeSliderEndAction(_ :)), for: .touchUpInside)
+        return slider
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,22 +41,6 @@ class ViewController: UIViewController {
         view.addSubview(rangeSlider)
     }
 
-    private func setRangeSlider() -> UIRangeSlider {
-        var sideInset: CGFloat { 40 }
-        let sliderFrame = CGRect(x: sideInset, y: UIScreen.main.bounds.height / 2, width: UIScreen.main.bounds.width - sideInset * 2, height: 10)
-        let thumbImageSize = CGSize(width: 40, height: 40)
-        let thumbImage = UIImage(named: "thumb")!
-        let trackTintColor = UIColor.lightGray
-        let trackHighlightTintColor = UIColor.gray
-
-        let slider = UIRangeSlider(thumbImageSize: thumbImageSize, thumbImage: thumbImage,
-                                   trackTintColor: trackTintColor, trackHighlightTintColor: trackHighlightTintColor,
-                                   frame: sliderFrame)
-        
-        slider.addTarget(self, action: #selector(rangeSliderAction(_ :)), for: .valueChanged)
-        slider.addTarget(self, action: #selector(rangeSliderEndAction(_ :)), for: .touchUpInside)
-        return slider
-    }
 
 
     //MARK: - SetData
