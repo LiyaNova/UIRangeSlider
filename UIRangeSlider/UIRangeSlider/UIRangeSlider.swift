@@ -9,35 +9,43 @@ import UIKit
 
 class UIRangeSlider: UIControl {
 
-    var minimumValue: CGFloat = 0.0
-    var maximumValue: CGFloat = 1.0
-    var lowerValue: CGFloat = 0.0
-    var upperValue: CGFloat = 1.0
+    //MARK: - Range setup properties
+    private var minimumValue: CGFloat = 0.0
+    private var maximumValue: CGFloat = 1.0
+    private let trackLayer = UIRangeSliderTrackLayer()
+    private let lowerThumbImageView = UIImageView()
+    private let upperThumbImageView = UIImageView()
+    private var previousLocation = CGPoint()
 
-    let trackLayer = UIRangeSliderTrackLayer()
-    let lowerThumbImageView = UIImageView()
-    let upperThumbImageView = UIImageView()
-    var previousLocation = CGPoint()
-
+    //MARK: - Range settings properties
+    // values to set: image and color
     var trackTintColor: UIColor = UIColor()
     var trackHighlightTintColor: UIColor = UIColor()
     var thumbImage: UIImage = UIImage()
-    var thumbImageSize: CGSize = CGSize(width: 0, height: 0)
-    private let minimumHitArea = CGSize(width: UIScreen.main.bounds.width, height: 100)
 
-    var upperPrice: CGFloat = 0
-    var lowerPrice: CGFloat = 0
+    // default values, can be reset: image size and hit area of ranger
+    var thumbImageSize: CGSize = CGSize(width: 20, height: 20)
+    var minimumHitArea: CGSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
 
+    // values to correct UIRangeSlider state depending on set lower/upper numbers:
+    // UIRangeSlider upper and lower values
+    var lowerValue: CGFloat = 0.0
+    var upperValue: CGFloat = 1.0
+    //  Set lower/upper numbers, for example price
+    var upperPrice: CGFloat = 0.0
+    var lowerPrice: CGFloat = 0.0
+
+    // Сomputed properties, final start and end numbers to show
     var startNumber: Int {
         let priceRange = upperPrice - lowerPrice
         return lround((lowerValue + 1.0 / (priceRange/lowerPrice)) * priceRange)
     }
-
     var endNumber: Int {
         let priceRange = upperPrice - lowerPrice
         return lround((upperValue + 1.0 / (priceRange/lowerPrice)) * priceRange)
     }
 
+    //MARK: - Init
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -45,26 +53,24 @@ class UIRangeSlider: UIControl {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
 }
 //MARK: - UIConfiguration
-
 extension UIRangeSlider {
-    
+
     func configurate() {
         trackLayer.rangeSlider = self
         trackLayer.contentsScale = UIScreen.main.scale
-        layer.addSublayer(trackLayer)
-
         lowerThumbImageView.image = thumbImage
-        addSubview(lowerThumbImageView)
-
         upperThumbImageView.image = thumbImage
+
+        layer.addSublayer(trackLayer)
+        addSubview(lowerThumbImageView)
         addSubview(upperThumbImageView)
+        
+        updateLayerFrames()
     }
 
-
-   func updateLayerFrames() {
+    func updateLayerFrames() {
         trackLayer.frame = bounds.insetBy(dx: 0.0, dy: bounds.height / 3)
         trackLayer.setNeedsDisplay()
         lowerThumbImageView.frame = CGRect(origin: thumbOriginForValue(lowerValue),
@@ -81,11 +87,9 @@ extension UIRangeSlider {
         let x = positionForValue(value) - thumbImageSize.width / 2
         return CGPoint(x: x, y: (bounds.height - thumbImageSize.height) / 2)
     }
-
 }
 
 //MARK: - UIRangeSliderTracking
-
 extension UIRangeSlider {
 
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {
@@ -123,9 +127,7 @@ extension UIRangeSlider {
         updateLayerFrames()
 
         CATransaction.commit()
-
         sendActions(for: .valueChanged)
-
         return true
     }
 
