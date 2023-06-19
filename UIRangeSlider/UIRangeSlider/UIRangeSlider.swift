@@ -32,17 +32,17 @@ class UIRangeSlider: UIControl {
     var lowerValue: CGFloat = 0.0
     var upperValue: CGFloat = 1.0
     //  Set lower/upper numbers, for example price
-    var upperPrice: CGFloat = 0.0
-    var lowerPrice: CGFloat = 0.0
+    var upperRangeNumber: CGFloat = 0.0
+    var lowerRangeNumber: CGFloat = 0.0
 
     // Сomputed properties, final start and end numbers to show
     var startNumber: Int {
-        let priceRange = upperPrice - lowerPrice
-        return lround((lowerValue + 1.0 / (priceRange/lowerPrice)) * priceRange)
+        let priceRange = upperRangeNumber - lowerRangeNumber
+        return lround((lowerValue + 1.0 / (priceRange/lowerRangeNumber)) * priceRange)
     }
     var endNumber: Int {
-        let priceRange = upperPrice - lowerPrice
-        return lround((upperValue + 1.0 / (priceRange/lowerPrice)) * priceRange)
+        let priceRange = upperRangeNumber - lowerRangeNumber
+        return lround((upperValue + 1.0 / (priceRange/lowerRangeNumber)) * priceRange)
     }
 
     //MARK: - Init
@@ -53,6 +53,22 @@ class UIRangeSlider: UIControl {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    func setStartAndEndRangeValues(_ upperNumber: CGFloat?, _ lowerNumber: CGFloat?) {
+        guard let lowerNumber = lowerNumber else { return }
+        guard let upperNumber = upperNumber else { return }
+        upperRangeNumber = upperNumber
+        lowerRangeNumber = lowerNumber
+        updateLayerFrames()
+    }
+
+    func setNewRangeValues(_ upperPrice: CGFloat, _ lowerPrice: CGFloat,_ defaultMinPrice: CGFloat) {
+        let priceRange = upperRangeNumber - lowerRangeNumber
+        lowerValue = 1.0 / (priceRange/(lowerPrice - defaultMinPrice))
+        upperValue = 1.0 / (priceRange/(upperPrice - defaultMinPrice))
+        updateLayerFrames()
+    }
+
 }
 //MARK: - UIConfiguration
 extension UIRangeSlider {
