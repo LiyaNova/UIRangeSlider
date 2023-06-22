@@ -60,10 +60,9 @@
 		3831C4872A38CB630089F811 /* UIRangeSlider */ = {
 			isa = PBXGroup;
 			children = (
-				3831C4882A38CB630089F811 /* AppDelegate.swift */,
 				3831C48A2A38CB630089F811 /* SceneDelegate.swift */,
 				3831C48C2A38CB630089F811 /* ViewController.swift */,
-				38BA58BB2A40955800E65187 /* RangeView.swift */,
+				38816EF22A418C6A0021C619 /* RangeView */,
 				3831C49C2A38CFEF0089F811 /* UIRangeSlider */,
 				3831C4A32A38D2920089F811 /* Utils */,
 			);
@@ -82,11 +81,20 @@
 		3831C4A32A38D2920089F811 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				3831C4882A38CB630089F811 /* AppDelegate.swift */,
 				3831C4912A38CB650089F811 /* Assets.xcassets */,
 				3831C4932A38CB650089F811 /* LaunchScreen.storyboard */,
 				3831C4962A38CB650089F811 /* Info.plist */,
 			);
 			name = Utils;
+			sourceTree = "<group>";
+		};
+		38816EF22A418C6A0021C619 /* RangeView */ = {
+			isa = PBXGroup;
+			children = (
+				38BA58BB2A40955800E65187 /* RangeView.swift */,
+			);
+			path = RangeView;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

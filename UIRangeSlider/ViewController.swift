@@ -9,12 +9,12 @@ import UIKit
 
 class ViewController: UIViewController {
 
-    private var minPrice: CGFloat = 19 // default 0,  should be/can be set depending on a range
-    private var defaultMinPrice: CGFloat = 19 // == minPrice
-    private var maxPrice: CGFloat? = 2023 // no default value, should be/can be set depending on a range
-    private var newMaxPrice: CGFloat = 0 // default 0, flexible max value
+    private var minNumber: CGFloat = 19 // default 0,  should be/can be set depending on a range
+    private var defaultMinNumber: CGFloat = 19 // == initial minPrice
+    private var maxNumber: CGFloat = 2023 // no default value, should be/can be set depending on a range
+    private var newMaxNumber: CGFloat = 0 // default 0, flexible max value
 
-    private var rangeView = RangeView()
+    private var rangeViewWithTextViews = RangeView()
     private lazy var rangeSlider: UIRangeSlider = {
         var sideInset: CGFloat { 40 }
         let sliderFrame = CGRect(x: sideInset, y: UIScreen.main.bounds.height / 2,
@@ -22,14 +22,13 @@ class ViewController: UIViewController {
                                  height: 10)
 
         let slider = UIRangeSlider(frame: sliderFrame)
-        slider.trackTintColor =  UIColor.lightGray
+        slider.trackTintColor =  UIColor.systemFill
         slider.trackHighlightTintColor = UIColor.gray
         slider.thumbImage = UIImage(named: "thumb")!
-        slider.thumbImageSize = CGSize(width: 25, height: 25)
+        slider.thumbImageSize = CGSize(width: 18, height: 18)
         slider.configurate()
 
         slider.addTarget(self, action: #selector(rangeSliderAction(_ :)), for: .valueChanged)
-
         return slider
     }()
 
@@ -39,59 +38,55 @@ class ViewController: UIViewController {
         hideKeyboardOnTap()
     }
 
+    //MARK: - Settings
+
     private func configureUI() {
-        setView()
         view.backgroundColor = .white
-        rangeView.delegate = self
-        rangeSlider.setStartAndEndRangeValues(maxPrice, minPrice)
-        rangeView.startTextView.text = String(rangeSlider.startNumber)
-        rangeView.endTextView.text = String(rangeSlider.endNumber)
+        setView()
+        setValues(minNumber, maxNumber)
+        rangeViewWithTextViews.delegate = self
     }
 
     private func setView() {
-        [rangeView, rangeSlider].forEach { view.addSubview($0)}
+        [rangeViewWithTextViews, rangeSlider].forEach { view.addSubview($0)}
 
         NSLayoutConstraint.activate([
-            rangeView.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 6),
-            view.trailingAnchor.constraint(equalToSystemSpacingAfter: rangeView.trailingAnchor, multiplier: 6),
-            rangeView.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60)
+            rangeViewWithTextViews.leadingAnchor.constraint(equalToSystemSpacingAfter: view.leadingAnchor, multiplier: 6),
+            view.trailingAnchor.constraint(equalToSystemSpacingAfter: rangeViewWithTextViews.trailingAnchor, multiplier: 6),
+            rangeViewWithTextViews.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -60)
         ])
     }
 
-    private func hideKeyboardOnTap() {
-        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
-        view.addGestureRecognizer(tap)
+    private func setValues(_ lowerValue: CGFloat, _ upperValue: CGFloat) {
+        rangeSlider.setStartAndEndRangeValues(upperValue, lowerValue)
+        rangeViewWithTextViews.startTextView.text = String(rangeSlider.startNumber)
+        rangeViewWithTextViews.endTextView.text = String(rangeSlider.endNumber)
     }
 
-    @objc private func hideKeyboard() {
-        view.endEditing(true)
+    private func setNewValue(_ lowerValue: CGFloat, _ upperValue: CGFloat) {
+        rangeSlider.setNewRangeValues(upperValue, lowerValue, defaultMinNumber)
+        rangeViewWithTextViews.startTextView.text = String(rangeSlider.startNumber)
+        rangeViewWithTextViews.endTextView.text = String(rangeSlider.endNumber)
     }
 
     //MARK: - RangeActions
 
     @objc private func rangeSliderAction(_ sender: UIRangeSlider) {
-        let lowerPrice = sender.startNumber
-        let upperPrice = sender.endNumber
-        minPrice = CGFloat(lowerPrice)
-        newMaxPrice = CGFloat(upperPrice)
-        rangeView.startTextView.text = String(lowerPrice)
-        rangeView.endTextView.text = String(upperPrice)
+        let lowerValue = sender.startNumber
+        let upperValue = sender.endNumber
+        minNumber = CGFloat(lowerValue)
+        newMaxNumber = CGFloat(upperValue)
+        rangeViewWithTextViews.startTextView.text = String(lowerValue)
+        rangeViewWithTextViews.endTextView.text = String(upperValue)
     }
-
-    private func setNewValue(_ lowerPrice: CGFloat, _ upperPrice: CGFloat) {
-        rangeSlider.setNewRangeValues(upperPrice, lowerPrice, defaultMinPrice)
-        rangeView.startTextView.text = String(rangeSlider.startNumber)
-        rangeView.endTextView.text = String(rangeSlider.endNumber)
-    }
-
 }
 
 //MARK: - RangeTextViewDelegate
 
 extension ViewController: RangeTextViewDelegate {
     
-    private var startNumberTextView: UITextView { rangeView.startTextView }
-    private var endNumberTextView: UITextView { rangeView.endTextView }
+    private var startNumberTextView: UITextView { rangeViewWithTextViews.startTextView }
+    private var endNumberTextView: UITextView { rangeViewWithTextViews.endTextView }
 
     func editingDidBegin(_ sender: UITextView) {
         if sender == startNumberTextView && startNumberTextView.isFirstResponder {
@@ -110,42 +105,61 @@ extension ViewController: RangeTextViewDelegate {
         if sender == startNumberTextView {
 
             if sender.text == "" {
-                startNumberTextView.text = String(rangeSlider.startNumber)
+                sender.text = String(rangeSlider.startNumber)
             }
 
-            guard let price = Int(startNumberTextView.text)  else { return }
-            guard let endPrice =  maxPrice  else { return }
-            minPrice = CGFloat(price)
-
-            if  (newMaxPrice == 0 || newMaxPrice >= endPrice) && (minPrice < endPrice && minPrice > defaultMinPrice) {
-                setNewValue(minPrice, endPrice)
-            } else  if (newMaxPrice == 0 || newMaxPrice >= endPrice) && (minPrice > endPrice || minPrice < defaultMinPrice) {
-                minPrice = defaultMinPrice
-                setNewValue(defaultMinPrice, endPrice)
-            } else if newMaxPrice != 0 && newMaxPrice < endPrice &&  minPrice < newMaxPrice {
-                setNewValue(minPrice, newMaxPrice)
-            } else if newMaxPrice != 0 && newMaxPrice < endPrice && minPrice > newMaxPrice  {
-                minPrice = defaultMinPrice
-                setNewValue(defaultMinPrice, newMaxPrice)
-            }
+            guard let number = Int(startNumberTextView.text)  else { return }
+            minNumber = CGFloat(number)
+            checkAndSetRangeWithStartNumber(&minNumber, maxNumber)
 
         } else if sender == endNumberTextView {
 
             if sender.text == "" {
-                endNumberTextView.text = String(rangeSlider.endNumber)
+                sender.text = String(rangeSlider.endNumber)
             }
 
-            guard let price = Int(endNumberTextView.text)  else { return }
-            guard let endPrice =  maxPrice  else { return }
-            newMaxPrice = CGFloat(price)
+            guard let number = Int(endNumberTextView.text)  else { return }
+            newMaxNumber = CGFloat(number)
+            checkAndSetRangeWithEndNumber(maxNumber)
 
-            if newMaxPrice != 0 && newMaxPrice < endPrice && newMaxPrice > minPrice {
-                setNewValue(minPrice, newMaxPrice)
-            } else {
-                setNewValue(minPrice, endPrice)
-            }
         }
+    }
 
+    private func checkAndSetRangeWithStartNumber(_ minNumber: inout CGFloat,_ maxNumber: CGFloat) {
+        if  (newMaxNumber == 0 || newMaxNumber >= maxNumber) && (minNumber < maxNumber && minNumber > defaultMinNumber) {
+            setNewValue(minNumber, maxNumber)
+        } else  if (newMaxNumber == 0 || newMaxNumber >= maxNumber) && (minNumber > maxNumber || minNumber < defaultMinNumber) {
+            minNumber = defaultMinNumber
+            setNewValue(defaultMinNumber, maxNumber)
+        } else if newMaxNumber != 0 && newMaxNumber < maxNumber &&  minNumber < newMaxNumber &&  minNumber > defaultMinNumber {
+            setNewValue(minNumber, newMaxNumber)
+        } else if newMaxNumber != 0 && newMaxNumber < maxNumber && (minNumber > newMaxNumber || minNumber < defaultMinNumber) {
+            minNumber = defaultMinNumber
+            setNewValue(defaultMinNumber, newMaxNumber)
+        }
+    }
+
+    private func checkAndSetRangeWithEndNumber(_ maxNumber: CGFloat) {
+        if newMaxNumber != 0 && newMaxNumber < maxNumber && newMaxNumber > minNumber {
+            setNewValue(minNumber, newMaxNumber)
+        } else {
+            setNewValue(minNumber, maxNumber)
+        }
+    }
+
+}
+
+//MARK: - Keyboard
+
+extension ViewController {
+
+    private func hideKeyboardOnTap() {
+        let tap = UITapGestureRecognizer(target: self, action: #selector(hideKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+
+    @objc private func hideKeyboard() {
+        view.endEditing(true)
     }
 
 }

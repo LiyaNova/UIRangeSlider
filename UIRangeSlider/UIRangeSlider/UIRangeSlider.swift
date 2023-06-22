@@ -34,15 +34,16 @@ class UIRangeSlider: UIControl {
     //  Set lower/upper numbers, for example price
     var upperRangeNumber: CGFloat = 0.0
     var lowerRangeNumber: CGFloat = 0.0
+    private var numbersRange: CGFloat { upperRangeNumber - lowerRangeNumber }
 
     // Сomputed properties, final start and end numbers to show
     var startNumber: Int {
-        let priceRange = upperRangeNumber - lowerRangeNumber
-        return lround((lowerValue + 1.0 / (priceRange/lowerRangeNumber)) * priceRange)
+        return numbersRange == 0 ? Int(upperRangeNumber) :
+                                   lround((lowerValue + 1.0 / (numbersRange/lowerRangeNumber)) * numbersRange)
     }
     var endNumber: Int {
-        let priceRange = upperRangeNumber - lowerRangeNumber
-        return lround((upperValue + 1.0 / (priceRange/lowerRangeNumber)) * priceRange)
+        return numbersRange == 0 ? Int(upperRangeNumber) :
+                                   lround((upperValue + 1.0 / (numbersRange/lowerRangeNumber)) * numbersRange)
     }
 
     //MARK: - Init
@@ -54,18 +55,15 @@ class UIRangeSlider: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setStartAndEndRangeValues(_ upperNumber: CGFloat?, _ lowerNumber: CGFloat?) {
-        guard let lowerNumber = lowerNumber else { return }
-        guard let upperNumber = upperNumber else { return }
+    func setStartAndEndRangeValues(_ upperNumber: CGFloat, _ lowerNumber: CGFloat) {
         upperRangeNumber = upperNumber
         lowerRangeNumber = lowerNumber
         updateLayerFrames()
     }
 
-    func setNewRangeValues(_ upperPrice: CGFloat, _ lowerPrice: CGFloat,_ defaultMinPrice: CGFloat) {
-        let priceRange = upperRangeNumber - lowerRangeNumber
-        lowerValue = 1.0 / (priceRange/(lowerPrice - defaultMinPrice))
-        upperValue = 1.0 / (priceRange/(upperPrice - defaultMinPrice))
+    func setNewRangeValues(_ upperNumber: CGFloat, _ lowerNumber: CGFloat,_ defaultMinNumber: CGFloat) {
+        lowerValue = 1.0 / (numbersRange/(lowerNumber - defaultMinNumber))
+        upperValue = 1.0 / (numbersRange/(upperNumber - defaultMinNumber))
         updateLayerFrames()
     }
 
