@@ -14,8 +14,19 @@
 		3831C4952A38CB650089F811 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 3831C4932A38CB650089F811 /* LaunchScreen.storyboard */; };
 		3831C49F2A38CFEF0089F811 /* UIRangeSliderTrackLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831C49D2A38CFEF0089F811 /* UIRangeSliderTrackLayer.swift */; };
 		3831C4A02A38CFEF0089F811 /* UIRangeSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3831C49E2A38CFEF0089F811 /* UIRangeSlider.swift */; };
+		389253F92A546E270047F8FC /* UIRangeSliderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 389253F82A546E270047F8FC /* UIRangeSliderTests.swift */; };
 		38BA58BC2A40955800E65187 /* RangeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 38BA58BB2A40955800E65187 /* RangeView.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		38D09ABA2A4C63C100D16149 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 3831C47D2A38CB630089F811 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 3831C4842A38CB630089F811;
+			remoteInfo = UIRangeSlider;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		3831C4852A38CB630089F811 /* UIRangeSlider.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = UIRangeSlider.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -27,11 +38,20 @@
 		3831C4962A38CB650089F811 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3831C49D2A38CFEF0089F811 /* UIRangeSliderTrackLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRangeSliderTrackLayer.swift; sourceTree = "<group>"; };
 		3831C49E2A38CFEF0089F811 /* UIRangeSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIRangeSlider.swift; sourceTree = "<group>"; };
+		389253F82A546E270047F8FC /* UIRangeSliderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIRangeSliderTests.swift; sourceTree = "<group>"; };
 		38BA58BB2A40955800E65187 /* RangeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RangeView.swift; sourceTree = "<group>"; };
+		38D09AB62A4C63C100D16149 /* UIRangeSliderTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UIRangeSliderTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		3831C4822A38CB630089F811 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38D09AB32A4C63C100D16149 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -45,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				3831C4872A38CB630089F811 /* UIRangeSlider */,
+				38D09AB72A4C63C100D16149 /* UIRangeSliderTests */,
 				3831C4862A38CB630089F811 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -53,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				3831C4852A38CB630089F811 /* UIRangeSlider.app */,
+				38D09AB62A4C63C100D16149 /* UIRangeSliderTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -97,6 +119,14 @@
 			path = RangeView;
 			sourceTree = "<group>";
 		};
+		38D09AB72A4C63C100D16149 /* UIRangeSliderTests */ = {
+			isa = PBXGroup;
+			children = (
+				389253F82A546E270047F8FC /* UIRangeSliderTests.swift */,
+			);
+			path = UIRangeSliderTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -117,6 +147,24 @@
 			productReference = 3831C4852A38CB630089F811 /* UIRangeSlider.app */;
 			productType = "com.apple.product-type.application";
 		};
+		38D09AB52A4C63C100D16149 /* UIRangeSliderTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 38D09ABE2A4C63C100D16149 /* Build configuration list for PBXNativeTarget "UIRangeSliderTests" */;
+			buildPhases = (
+				38D09AB22A4C63C100D16149 /* Sources */,
+				38D09AB32A4C63C100D16149 /* Frameworks */,
+				38D09AB42A4C63C100D16149 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				38D09ABB2A4C63C100D16149 /* PBXTargetDependency */,
+			);
+			name = UIRangeSliderTests;
+			productName = UIRangeSliderTests;
+			productReference = 38D09AB62A4C63C100D16149 /* UIRangeSliderTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -129,6 +177,11 @@
 				TargetAttributes = {
 					3831C4842A38CB630089F811 = {
 						CreatedOnToolsVersion = 14.3.1;
+					};
+					38D09AB52A4C63C100D16149 = {
+						CreatedOnToolsVersion = 14.3.1;
+						LastSwiftMigration = 1430;
+						TestTargetID = 3831C4842A38CB630089F811;
 					};
 				};
 			};
@@ -146,6 +199,7 @@
 			projectRoot = "";
 			targets = (
 				3831C4842A38CB630089F811 /* UIRangeSlider */,
+				38D09AB52A4C63C100D16149 /* UIRangeSliderTests */,
 			);
 		};
 /* End PBXProject section */
@@ -157,6 +211,13 @@
 			files = (
 				3831C4952A38CB650089F811 /* LaunchScreen.storyboard in Resources */,
 				3831C4922A38CB650089F811 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		38D09AB42A4C63C100D16149 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -176,7 +237,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		38D09AB22A4C63C100D16149 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				389253F92A546E270047F8FC /* UIRangeSliderTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		38D09ABB2A4C63C100D16149 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 3831C4842A38CB630089F811 /* UIRangeSlider */;
+			targetProxy = 38D09ABA2A4C63C100D16149 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		3831C4932A38CB650089F811 /* LaunchScreen.storyboard */ = {
@@ -358,6 +435,45 @@
 			};
 			name = Release;
 		};
+		38D09ABC2A4C63C100D16149 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7C8WHKH2QX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuliyanova.UIRangeSliderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIRangeSlider.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UIRangeSlider";
+			};
+			name = Debug;
+		};
+		38D09ABD2A4C63C100D16149 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7C8WHKH2QX;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yuliyanova.UIRangeSliderTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/UIRangeSlider.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/UIRangeSlider";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -375,6 +491,15 @@
 			buildConfigurations = (
 				3831C49A2A38CB650089F811 /* Debug */,
 				3831C49B2A38CB650089F811 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		38D09ABE2A4C63C100D16149 /* Build configuration list for PBXNativeTarget "UIRangeSliderTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				38D09ABC2A4C63C100D16149 /* Debug */,
+				38D09ABD2A4C63C100D16149 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
