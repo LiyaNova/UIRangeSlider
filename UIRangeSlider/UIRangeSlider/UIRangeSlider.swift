@@ -8,8 +8,8 @@
 import UIKit
 
 class UIRangeSlider: UIControl {
-
     //MARK: - Range setup properties
+
     private var minimumValue: CGFloat = 0.0
     private var maximumValue: CGFloat = 1.0
     private let trackLayer = UIRangeSliderTrackLayer()
@@ -18,12 +18,13 @@ class UIRangeSlider: UIControl {
     private var previousLocation = CGPoint()
 
     //MARK: - Range settings properties
+
     // values to set: image and color
     var trackTintColor: UIColor = UIColor()
     var trackHighlightTintColor: UIColor = UIColor()
     var thumbImage: UIImage = UIImage()
 
-    // default values, can be reset: image size and hit area of ranger
+    // default values, can be reset: image size and hit area of UIRangeSlider
     var thumbImageSize: CGSize = CGSize(width: 20, height: 20)
     var minimumHitArea: CGSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
 
@@ -31,22 +32,24 @@ class UIRangeSlider: UIControl {
     // UIRangeSlider upper and lower values
     var lowerValue: CGFloat = 0.0
     var upperValue: CGFloat = 1.0
-    //  Set lower/upper numbers, for example price
+    // Set lower/upper numbers (for example, price)
     var upperRangeNumber: CGFloat = 0.0
     var lowerRangeNumber: CGFloat = 0.0
     private var numbersRange: CGFloat { upperRangeNumber - lowerRangeNumber }
 
-    // Сomputed properties, final start and end numbers to show
+    // Сomputed properties, final start and end UIRangeSlider values to show
     var startNumber: Int {
         return numbersRange == 0 ? Int(upperRangeNumber) :
                                    lround((lowerValue + 1.0 / (numbersRange/lowerRangeNumber)) * numbersRange)
     }
+
     var endNumber: Int {
         return numbersRange == 0 ? Int(upperRangeNumber) :
                                    lround((upperValue + 1.0 / (numbersRange/lowerRangeNumber)) * numbersRange)
     }
 
     //MARK: - Init
+
     override init(frame: CGRect) {
         super.init(frame: frame)
     }
@@ -55,20 +58,25 @@ class UIRangeSlider: UIControl {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func setStartAndEndRangeValues(_ upperNumber: CGFloat, _ lowerNumber: CGFloat) {
+    func setStartAndEndSliderValues(_ upperNumber: CGFloat, _ lowerNumber: CGFloat) {
         upperRangeNumber = upperNumber
         lowerRangeNumber = lowerNumber
         updateLayerFrames()
     }
 
-    func setNewRangeValues(_ upperNumber: CGFloat, _ lowerNumber: CGFloat,_ defaultMinNumber: CGFloat) {
+    func setNewRangeAndUpdateSlider(_ upperNumber: CGFloat, _ lowerNumber: CGFloat,_ defaultMinNumber: CGFloat) {
+        setNewSliderRange(upperNumber, lowerNumber, defaultMinNumber)
+        updateLayerFrames()
+    }
+
+   func setNewSliderRange(_ upperNumber: CGFloat, _ lowerNumber: CGFloat,_ defaultMinNumber: CGFloat) {
         lowerValue = 1.0 / (numbersRange/(lowerNumber - defaultMinNumber))
         upperValue = 1.0 / (numbersRange/(upperNumber - defaultMinNumber))
-        updateLayerFrames()
     }
 
 }
 //MARK: - UIConfiguration
+
 extension UIRangeSlider {
 
     func configurate() {
@@ -104,6 +112,7 @@ extension UIRangeSlider {
 }
 
 //MARK: - UIRangeSliderTracking
+
 extension UIRangeSlider {
 
     override func beginTracking(_ touch: UITouch, with event: UIEvent?) -> Bool {

@@ -12,47 +12,62 @@ final class UIRangeSliderTests: XCTestCase {
 
     //Arrange
     var sut: UIRangeSlider!
-    var commonNumber: CGFloat!
+    var defaultNumber: CGFloat!
 
     override func setUpWithError() throws {
         sut = UIRangeSlider()
-        commonNumber = 5
+        defaultNumber = 5
     }
 
     override func tearDownWithError() throws {
         sut = nil
-        commonNumber = nil
+        defaultNumber = nil
     }
 
     func testUIRangeSlider_WhenRangeLowerAndUpperValuesEqual_SliderStartAndEndNumbersEqual() {
         //Act
-        sut.upperRangeNumber = commonNumber
-        sut.lowerRangeNumber = commonNumber
+        sut.lowerRangeNumber = defaultNumber
+        sut.upperRangeNumber = defaultNumber
         //Assert
         XCTAssertEqual(sut.startNumber, sut.endNumber)
     }
 
     func testUIRangeSlider_WhenRangeLowerAndUpperValuesNotEqual_SliderStartAndEndNumbersNotEqual() {
         //Act
-        sut.upperRangeNumber = commonNumber
-        sut.lowerRangeNumber = commonNumber * 2
+        sut.lowerRangeNumber = defaultNumber
+        sut.upperRangeNumber = defaultNumber * 2
         //Assert
         XCTAssertNotEqual(sut.startNumber, sut.endNumber)
     }
 
     func testUIRangeSlider_WhenRangeLowerAndUpperValuesNotEqual_SliderStartNumberEqualToRangeLowerValue() {
         //Act
-        sut.upperRangeNumber = commonNumber
-        sut.lowerRangeNumber = commonNumber * 2
+        sut.lowerRangeNumber = defaultNumber
+        sut.upperRangeNumber = defaultNumber * 2
         //Assert
         XCTAssertEqual(sut.startNumber, Int(sut.lowerRangeNumber))
     }
 
     func testUIRangeSlider_WhenRangeLowerAndUpperValuesNotEqual_SliderEndNumberEqualToRangeUpperValue() {
         //Act
-        sut.upperRangeNumber = commonNumber
-        sut.lowerRangeNumber = commonNumber * 2
+        sut.lowerRangeNumber = defaultNumber
+        sut.upperRangeNumber = defaultNumber * 2
         //Assert
         XCTAssertEqual(sut.endNumber, Int(sut.upperRangeNumber))
+    }
+
+    func testUIRangeSlider_WhenSetNewRangeValues_SliderStartAndEndNumberEqualToNewValues() {
+        //Act
+        sut.lowerRangeNumber = defaultNumber
+        sut.upperRangeNumber = defaultNumber * 2
+
+        let defaultMinValue = defaultNumber
+        let newMinValue = defaultNumber * 2
+        let newMaxValue = defaultNumber * 5
+
+        sut.setNewSliderRange(newMaxValue, newMinValue, defaultMinValue!)
+        //Assert
+        XCTAssertEqual(sut.startNumber, Int(newMinValue))
+        XCTAssertEqual(sut.endNumber, Int(newMaxValue))
     }
 }

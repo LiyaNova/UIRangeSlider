@@ -47,11 +47,13 @@ extension RangeView {
         startTextView.backgroundColor = .secondarySystemBackground
         startTextView.textAlignment = .center
         startTextView.font = UIFont.preferredFont(forTextStyle: .body)
+        startTextView.keyboardType = .numberPad
         startTextView.delegate = self
 
         endTextView.backgroundColor = .secondarySystemBackground
         endTextView.textAlignment = .center
         endTextView.font = UIFont.preferredFont(forTextStyle: .body)
+        endTextView.keyboardType = .numberPad
         endTextView.delegate = self
 
         stackView.axis = .horizontal

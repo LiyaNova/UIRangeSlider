@@ -1,0 +1,29 @@
+{
+  "configurations" : [
+    {
+      "id" : "4B80C8A4-8921-4837-999D-14995492E5DB",
+      "name" : "Test Scheme Action",
+      "options" : {
+
+      }
+    }
+  ],
+  "defaultOptions" : {
+    "targetForVariableExpansion" : {
+      "containerPath" : "container:UIRangeSlider.xcodeproj",
+      "identifier" : "3831C4842A38CB630089F811",
+      "name" : "UIRangeSlider"
+    }
+  },
+  "testTargets" : [
+    {
+      "parallelizable" : true,
+      "target" : {
+        "containerPath" : "container:UIRangeSlider.xcodeproj",
+        "identifier" : "38D09AB52A4C63C100D16149",
+        "name" : "UIRangeSliderTests"
+      }
+    }
+  ],
+  "version" : 1
+}
