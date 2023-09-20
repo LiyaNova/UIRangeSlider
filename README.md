@@ -1,3 +1,4 @@
+
 # UIRangeSlider
 Custom UIRangeSlider allows to set the start and end values, adjust the color and slider images with their size.
 The slider also makes it possible to update its values externally, such as with textFields or textViews.
@@ -8,5 +9,5 @@ ____________________________________________________________
 Также слайдер дает возможность обновлять свои значения извне, например, используя текстфилды или текствью.
 Пример работы с UIRangeSlider можно увидеть в демо.
 ____________________________________________________________
-https://github.com/LiyaNova/UIRangeSlider/assets/98648373/a55dc0f3-462a-43dd-81de-371d509992f6
+https://github.com/LiyaNova/UIRangeSlider/assets/98648373/66f9e69e-f053-4cb9-b765-d2e45a8121e3
 
